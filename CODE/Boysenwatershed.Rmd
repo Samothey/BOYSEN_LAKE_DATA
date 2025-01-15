@@ -1,0 +1,52 @@
+---
+title: "Figures"
+author: "Samantha Peña"
+date: "2025-01-15"
+output: html_document
+---
+## Boysen waterhsed delineation figures##
+## Export Watershed data 
+
+###Step 1: Save/Export the Watershed from Model My Watershed:
+After delineating the watershed on the website, look for an Export or Download option.
+Export the watershed as a Shapefile, GeoJSON, or KML. Shapefiles are ideal for spatial analysis in R.
+Download Files:
+If exporting as a Shapefile, it will download as a .zip file containing multiple components (.shp, .shx, .dbf, .prj, etc.).
+If exporting as a GeoJSON or KML, it will be a single file.
+##Step 2:Step 2: Move the Data to Your R Working Directory
+Place the downloaded file into your R working directory or specify its full file path.
+If it is a .zip file, unzip it into a folder.
+## Step 3: Load the Data into R
+Now, you can load the watershed data into R using the sf package:
+
+```{r setup, include=FALSE}
+# Install and load necessary library
+if (!require("sf")) install.packages("sf")
+library(sf)
+
+# Verify the file path
+shapefile_path <- "~/Desktop/LAKE_DATA/Figures/Figures/Continental_US_from_NHDplus_v2-2"
+
+# Load the shapefile into R as an sf object
+watershed_sf <- st_read(shapefile_path)
+
+watershed_sf <- st_read('~/Desktop/LAKE_DATA/Figures/Figures/Continental_US_from_NHDplus_v2-2')
+
+
+# View the watershed data
+print(watershed_sf)
+
+# Plot the watershed
+plot(st_geometry(watershed_sf))
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
